@@ -1,15 +1,45 @@
+<style>
+    .stars.checked {
+        color: orange;
+    }
+    .stars:not(.checked){
+        color: grey;
+    }
+</style>
+
 <div>
 
-<h1>Stores</h1>
+    <h1>Stores</h1>
 
-TODO
-
-<%
+    <%
   # TODO: (Bonus Task) Implement complete store functionality
   # - Display all online stores here
   # - When clicked, go to stores#show page
   # - Add a link to create store
   # - Display store rating (based on the ratings from purchase reviews)
 %>
+
+    <div class="row">
+
+        <% @products.each do |product| %>
+        <%# product.total_rating.inspect %>
+        <div class="col-4">
+            <div class="card" style="width: 18rem;">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <%= link_to product.name, product_url(product), class: "h5 card-title" %>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <% (1..5).each do |i| %>
+                        <span class="stars fa fa-star <%= i <= product.total_rating[0] ? 'checked' : ''  %>"></span>
+                    <% end %>
+                    <%= product.total_rating[0] %>
+                    <%= link_to 'Buy', new_product_purchase_url(product), class: 'btn btn-primary float-right' %>
+                </div>
+            </div>
+        </div>
+        <% end %>
+
+    </div>
+
 
 </div>

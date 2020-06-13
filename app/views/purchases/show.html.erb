@@ -1,24 +1,24 @@
 <div>
 
-<h1>Purchase #<%= @purchase.id %></h1>
+    <h1>Purchase #<%= @purchase.id %></h1>
 
-Quantity: <%= @purchase.quantity %>
-<br />
-Address: <%= @purchase.delivery_address %>
-<br />
-<%# TODO: Format the date time to make it more readable %>
-Purchased at: <%= @purchase.created_at %>
+    Quantity: <%= @purchase.quantity %>
+    <br />
+    Address: <%= @purchase.delivery_address %>
+    <br />
+    <%# TODO: Format the date time to make it more readable %>
+    Purchased at: <%= @purchase.created_at %>
 
-<br />
-<br />
+    <br />
+    <br />
 
-<%# TODO: Open purchases#edit page %>
-<%= link_to 'Edit', '' %>
+    <%# TODO: Open purchases#edit page %>
+    <%= link_to 'Edit', edit_product_purchase_path(@product.id ,@purchase.id) %>
 
-&nbsp;&nbsp;
+    &nbsp;&nbsp;
 
-<%# TODO: Make a DELETE request to purchases#destroy %>
-<%= link_to 'Delete', '' %>
+    <%# TODO: Make a DELETE request to purchases#destroy %>
+    <%= link_to 'Delete', @product_purchase_path, :method => :delete, :confirm => "Are you sure ?" %>
 
 </div>
 
@@ -27,9 +27,11 @@ Purchased at: <%= @purchase.created_at %>
 <h2>Review</h2>
 
 <% if @purchase.review_exist? %>
-  <%# TODO: Display the review here %>
+<%# TODO: Display the review here %>
 <% else %>
-  <%= link_to 'Give a Review', new_review_url(review: { purchase_id: @purchase.id }) %>
+    <%= link_to 'Give a Review', new_review_path(purchase_id: @purchase.id) %> 
+    <%# link_to 'Give a Review', review_path() %>  
+    <%# link_to 'Give a Review', new_review_url(review: { purchase_id: @purchase.id }) %>
 <% end %>
 
 </div>
