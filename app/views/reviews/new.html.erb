@@ -1,11 +1,11 @@
 <div>
 
 <%= form_with model: @review, local: true do |f| %>
-  <%= f.hidden_field :purchase_id %>
+  <%= f.hidden_field :purchase_id, :value => @purchase.id %>
 
   <div style="margin-top: 10px;">
     <div><%= f.label :rating %><div>
-    <%= f.text_field :rating %>
+    <%= f.number_field :rating %>
   </div>
   
   <div style="margin-top: 10px;">
