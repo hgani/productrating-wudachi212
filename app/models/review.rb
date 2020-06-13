@@ -20,6 +20,7 @@
 class Review < ApplicationRecord
   belongs_to :purchase
 
+  validates :purchase_id, presence: true
   validates :rating, presence: true, numericality: { only_integer: true }
   validates :comment, presence: true
 
@@ -30,5 +31,11 @@ class Review < ApplicationRecord
     # - Rating cannot be greater than 5
     # - Rating cannot be a negative number
     # - Handle any potential error/crash
+    if rating && rating > 5
+      errors.add(:rating, "can't be greater than 5")
+    elsif rating < 0
+      errors.add(:rating, "can't be negative number")
+    end
   end
+
 end
