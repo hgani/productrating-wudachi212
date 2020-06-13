@@ -19,6 +19,7 @@ class Product < ApplicationRecord
   
   validate :quantity_within_limit
 
+  # mendapatkan total rating dari reviews
   def total_rating
     self.purchases.joins(:reviews).pluck('COALESCE(sum(reviews.rating)/count(reviews.id),0) as total_rating')
   end
