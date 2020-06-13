@@ -11,13 +11,18 @@
 #
 class Product < ApplicationRecord
   has_many :purchases
+  has_many :reviews, through: :purchases
   
   validates :name, presence: true
   validates :quantity, presence: true
   validates :price, presence: true
   
   validate :quantity_within_limit
-  
+
+  def total_rating
+    self.purchases.joins(:reviews).pluck('COALESCE(sum(reviews.rating)/count(reviews.id),0) as total_rating')
+  end
+
   def quantity_within_limit
     return unless quantity
 
